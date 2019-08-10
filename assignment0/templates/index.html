@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>NLP</title>
+
+    <meta name="description" content="NLP Assignment 0">
+    <meta name="author" content="Sushant">
+
+    <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="css/style.css"  rel="stylesheet">
+
+  </head>
+  <body>
+	  
+	  <div class="container-fluid">
+		  <div class="row">
+			  <div class="col-md-12">
+				  <div class="page-header">
+					  <h1>
+						  Natural Language Processing
+						</h1>
+						<h3>
+							Assignment 0
+						</h3>
+					</div>
+					<h5>
+						Unicode Character Counter
+					</h5>
+					<p>
+						Roll : CS1807<br><br>Enter Your text in the box below, and press compute.<br>
+					</p>
+					<form role="form" method="post" >
+						<div class="form-group">
+							<!-- <label for="exampleFormControlTextarea1">Text for Character Counter</label> -->
+							<textarea class="form-control rounded-0 z-depth-1" name="assignment0-text-area" id="exampleFormControlTextarea1" rows=10 placeholder="Write something here..." ></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">
+							Compute
+						</button>
+					</form>
+					<p class="text-center text-info">
+						<ul class="list-group">
+							{% for key, value in result.items() %}
+							<li class="list-group-item">{{key}} : {{value}}</li>
+							{% endfor %}
+						</ul>
+					</p>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/scripts.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>NLP</title>
+
+    <meta name="description" content="NLP Assignment 1">
+    <meta name="author" content="Sushant">
+
+    <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="css/style.css"  rel="stylesheet">
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#exampleFormControlTextarea1').keydown(function(e) {
+				if (e.keyCode == '32'){
+					var text = $('#exampleFormControlTextarea1').val();
+					$('#output-region-list').empty();
+					$.ajax({
+					url: "/predict-next-words",
+					type: "get",
+					data: {message: text},
+					success: function(response) {
+						console.log(response)
+						var ul = document.getElementById("output-region-list")
+						for (key in response){
+							var li = document.createElement("li")
+							li.setAttribute("class","list-group-item")
+							li.innerText = key+' ('+response[key]+')'
+							ul.appendChild(li)
+						}
+					},
+					});
+				}
+			});
+		});
+	 </script>
+  </head>
+  <body>
+	
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="text-center">
+					NLP Assignment 1<br />CS 1807<br />English Query Prediction
+				</h3>
+				<div class="row">
+					<div class="col-md-8">
+						<h4 class="text-center">Type in the box below</h4>
+						<p class="text-center">(Predictions would be made after each space key)</p>
+						<div class="form-group">
+								<textarea class="form-control rounded-0 z-depth-1" name="assignment1-text-area" id="exampleFormControlTextarea1" rows="10" placeholder="Write something here..."></textarea>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h4 class="text-center">Predictions are listed below.</h4>
+						<p class="text-center text-info" id="output-region">
+							<ul class="list-group" id="output-region-list">
+							</ul>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    
+  </body>
+</html>
