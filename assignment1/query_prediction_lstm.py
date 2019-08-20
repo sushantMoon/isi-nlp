@@ -19,9 +19,11 @@ class lstm:
                 self.word_indices[word] = int(index)
                 self.indices_word[int(index)] = word
         return None
-    
+
     def preprocess_input(self, message):
-        x = np.zeros((1, self.MIN_SEQUENCE_LEN-1, len(self.dictionary)), dtype=np.bool)
+        x = np.zeros(
+            (1, self.MIN_SEQUENCE_LEN-1, len(self.dictionary)), dtype=np.bool
+        )
         if len(message) > 2:
             message = message[-3:]
             for t, w in enumerate(message):
@@ -42,7 +44,7 @@ class lstm:
                 else:
                     pass
         return x
-    
+
     def sample(self, preds, temperature=1.0):
         # helper function to sample an index from a probability array
         preds = np.asarray(preds).astype('float64')
@@ -52,13 +54,13 @@ class lstm:
         probas = np.random.multinomial(1, preds, 1)
         return np.argmax(probas)
 
-    def get_prediction(self, message, quantity=10):
+    def get_prediction(self, message, quantity=5):
         message = [x.strip() for x in message.strip().split()]
         if len(message) < 1:
             return {}
         x = self.preprocess_input(message)
         y = self.model.predict(x)
-        
+
         probs = y[0]
         predictions = {}
         for _ in range(quantity):
